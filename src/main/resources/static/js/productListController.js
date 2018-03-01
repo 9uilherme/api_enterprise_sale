@@ -42,11 +42,28 @@ app.controller("productListController", function ($scope, $http, $window, produc
 		})
 	}
 	findAllProducts();
+	
+	function findIndexElementById(arr, val){
+		for(var i = 0; i < arr.length; i++){
+			if(arr[i].id == val)
+				return i;
+		}
+	}
 
 	$scope.deleteProduct = function(){
 		productRepository.deleteProduct($scope.productChecked.id, function(result){
 			if(result){
-				$scope.products.splice($scope.products.indexOf($scope.productChecked),1);
+
+				var valToSplice = findIndexElementById($scope.products, $scope.productChecked.id);
+				if(valToSplice != undefined && valToSplice >= 0){
+					$scope.products.splice(valToSplice, 1);
+				}
+				$scope.productChecked =  {
+						id: null,
+						name: null,
+						description: null,
+						price: null
+				};
 				$scope.success = 'sucesso ao deletar produto!';
 				$scope.erro = null;
 			}else{

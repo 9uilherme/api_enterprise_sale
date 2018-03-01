@@ -43,11 +43,21 @@ app.controller("clientListController", function ($scope, $window, clientReposito
 	}
 	
 	findAllClients();
-
+	
+	function findIndexElementById(arr, val){
+		for(var i = 0; i < arr.length; i++){
+			if(arr[i].id == val)
+				return i;
+		}
+	}
 	$scope.deleteClient = function(){
 		clientRepository.deleteClient($scope.clientChecked.id, function(result){
 			if(result){
-				$scope.clients.splice($scope.clients.indexOf($scope.clientChecked),1);
+				var valToSplice = findIndexElementById($scope.clients, $scope.clientChecked.id);
+				if(valToSplice != undefined && valToSplice >= 0){
+					$scope.clients.splice(valToSplice, 1);
+				}
+
 				$scope.clientChecked =  {
 						id: null,
 						name: null,

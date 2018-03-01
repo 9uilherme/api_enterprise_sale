@@ -1,4 +1,4 @@
-app.controller("saleListController", function ($scope, $http, $window, saleRepository, help1){
+app.controller("saleListController", function ($scope, $http, $window, saleRepository, help1, $timeout){
 
 	$scope.help1 = "Os produtos da venda são exibidos ao editar. " + help1;
 	$scope.isFiltros = false;
@@ -31,14 +31,23 @@ app.controller("saleListController", function ($scope, $http, $window, saleRepos
 			});
 		})
 	}
-
+	function findIndexElementById(arr, val){
+		for(var i = 0; i < arr.length; i++){
+			if(arr[i].id == val)
+				return i;
+		}
+	}
 
 	findAllSales();
 
 	$scope.deleteSale = function(){
 		saleRepository.deleteSale($scope.saleChecked.id, function(result){
 			if(result){
-				$scope.sales.splice($scope.sales.indexOf($scope.saleChecked), 1);
+				var valToSplice = findIndexElementById($scope.sales, $scope.saleChecked.id);
+				if(valToSplice != undefined && valToSplice >= 0){
+					$scope.sales.splice(valToSplice, 1);
+				}
+
 				$scope.saleChecked = {	id: null,
 						client: null,
 						products: []};
