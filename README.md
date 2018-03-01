@@ -6,35 +6,13 @@
 
 -Model:
 
-a. Client
-
-  i. name (string, obrigatório)
+a. Client (name (string, obrigatório), email (string, obrigatório), birthdate (date, opcional))
   
-  ii. email (string, obrigatório)
+b. Product (name (string, obrigatório), description (string, opcional), price (double, obrigatório))
   
-  iii. birthdate (date, opcional)
+c. Sale (client (obrigatório), products (obrigatório pelo menos 1 produto))
   
-b. Product
-
-  i. name (string, obrigatório)
-  
-  ii. description (string, opcional)
-  
-  iii. price (double, obrigatório)
-  
-c. Sale
-
-  i. client (obrigatório)
-  
-  ii. products (obrigatório pelo menos 1 produto)
-  
-d. Sale_product
-
-  i. sale
-  
-  ii. quantity
-  
-  iii. product
+d. Sale_product (sale, quantity, product)
 
 -Telas (CRUD) dos models acima
 
