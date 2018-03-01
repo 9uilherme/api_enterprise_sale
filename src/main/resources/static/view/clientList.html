@@ -1,0 +1,74 @@
+<meta charset="UTF-8">
+
+<div class="alert alert-danger" ng-show="erro">{{ erro }}</div>
+<div class="alert alert-success" ng-show="success">{{ success }}</div>
+<div id="opcoesTabela">
+	<div class="bottom1 left1 height50" ng-show="!clientChecked.id">
+		<div class="alert alert-warning">{{ help1 }}</div>
+	</div>
+	<div class="row bottom1 left1 height50" ng-show="clientChecked.id">
+		<button type="button" class="btn btn-info">
+			<span class="glyphicon glyphicon-pencil"></span> <a
+				style="color: white" ng-href="/clientEdit/{{clientChecked.id}}">Editar
+				Cliente</a>
+		</button>
+		<button type="button" class="btn btn-danger">
+			<span class="glyphicon glyphicon-remove"></span> <a
+				style="color: white" ng-click="deleteClient()"
+				ng-disabled="!clientChecked.id">Remover Cliente</a>
+		</button>
+	</div>
+	<div class="row positRight right1">
+		<button
+			ng-show="isFiltros && ( filtro.name.length > 0 || filtro.email.length > 0)"
+			type="button" class="btn btn-success" ng-click="buscarFiltros()">
+			<span class="glyphicon glyphicon-search"></span> Buscar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="!isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Mostrar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Esconder Filtros
+		</button>
+		<button type="button" class="btn btn-info" ng-click="limparFiltros()">
+			<span class="glyphicon glyphicon-erase"></span> Limpar Filtros
+		</button>
+	</div>
+
+</div>
+<div style="width: 100%">
+	<table class="table table-striped">
+		<thead>
+			<tr class="">
+				<th style="width: 10%">#</th>
+				<th style="width: 30%">Nome</th>
+				<th style="width: 30%">Email</th>
+				<th style="width: 30%">Data de nascimento</th>
+			</tr>
+			<tr ng-show="isFiltros">
+				<th></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.name" /></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.email" /></th>
+				<th><input ng-disabled="true" class="form-control" type="text"
+					ng-model="filtro.birthDate" /></th>
+			</tr>
+		</thead>
+		<tfoot>
+
+		</tfoot>
+		<tbody>
+			<tr ng-repeat="client in clients">
+				<td><input type="radio" ng-model="clientChecked.id"
+					ng-value="client.id" /></td>
+				<td>{{client.name}}</td>
+				<td>{{client.email}}</td>
+				<td>{{client.birthDate | date: 'dd/MM/yyyy'}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

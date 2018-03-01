@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+</head>
+<body>
+	<div>
+		<a style="color: black; text-decoration: none" id="redir" href="/">Redirecting ...</a>
+	</div>
+
+	<script>
+		$(function() {
+
+			var href = $('#redir').attr('href');
+			window.location.href = href;
+		});
+	</script>
+</body>
+</html>

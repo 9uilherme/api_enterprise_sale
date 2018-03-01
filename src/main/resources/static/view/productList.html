@@ -1,0 +1,73 @@
+<meta charset="UTF-8">
+
+<div class="alert alert-danger" ng-show="erro">{{ erro }}</div>
+<div class="alert alert-success" ng-show="success">{{ success }}</div>
+<div id="opcoesTabela">
+	<div class="bottom1 left1 height50" ng-show="!productChecked.id">
+		<div class="alert alert-warning">{{ help1 }}</div>
+	</div>
+	<div class="row bottom1 left1 height50" ng-show="productChecked.id">
+		<button type="button" class="btn btn-info">
+			<span class="glyphicon glyphicon-pencil"></span> <a
+				style="color: white" ng-href="/productEdit/{{productChecked.id}}">Editar
+				produto</a>
+		</button>
+		<button type="button" class="btn btn-danger">
+			<span class="glyphicon glyphicon-remove"></span> <a
+				style="color: white" ng-click="deleteProduct()"
+				ng-disabled="!productChecked.id">Remover produto</a>
+		</button>
+	</div>
+	<div class="row positRight right1">
+		<button
+			ng-show="isFiltros && ( filtro.name.length > 0 || filtro.description.length > 0)"
+			type="button" class="btn btn-success" ng-click="buscarFiltros()">
+			<span class="glyphicon glyphicon-search"></span> Buscar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="!isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Mostrar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Esconder Filtros
+		</button>
+		<button type="button" class="btn btn-info" ng-click="limparFiltros()">
+			<span class="glyphicon glyphicon-erase"></span> Limpar Filtros
+		</button>
+	</div>
+</div>
+<div style="width: 100%">
+	<table class="table table-striped">
+		<thead>
+			<tr class="">
+				<th style="width: 10%">#</th>
+				<th style="width: 30%">Nome</th>
+				<th style="width: 30%">Descrição</th>
+				<th style="width: 30%">Preço</th>
+			</tr>
+			<tr ng-show="isFiltros">
+				<th></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.name" /></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.description" /></th>
+				<th><input ng-disabled="true" class="form-control" type="text"
+					ng-model="filtro.price" /></th>
+			</tr>
+		</thead>
+		<tfoot>
+
+		</tfoot>
+		<tbody>
+			<tr ng-repeat="product in products">
+				<td><input type="radio" ng-model="productChecked.id"
+					ng-value="product.id" /></td>
+				<td>{{product.name}}</td>
+				<td>{{product.description}}</td>
+				<td>R$ {{product.price}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

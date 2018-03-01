@@ -1,0 +1,68 @@
+<meta charset="UTF-8">
+
+<div class="alert alert-danger" ng-show="erro">{{ erro }}</div>
+<div class="alert alert-success" ng-show="success">{{ success }}</div>
+<div id="opcoesTabela">
+	<div class="bottom1 left1 height50" ng-show="!saleChecked.id">
+		<div class="alert alert-warning">{{ help1 }}</div>
+	</div>
+	<div class="row bottom1 left1 height50" ng-show="saleChecked.id">
+		<button type="button" class="btn btn-info">
+			<span class="glyphicon glyphicon-pencil"></span> <a
+				style="color: white" ng-href="/saleEdit/{{saleChecked.id}}">Editar
+				venda</a>
+		</button>
+		<button type="button" class="btn btn-danger">
+			<span class="glyphicon glyphicon-remove"></span> 
+			<a  ng-click="deleteSale()" style="color: white" ng-disabled="!saleChecked.id">Remover venda</a>
+		</button>
+	</div>
+	<div class="row positRight right1">
+		<button
+			ng-show="isFiltros && ( filtro.id.length > 0 || filtro.client.name.length > 0)"
+			type="button" class="btn btn-success" ng-click="buscarFiltros()">
+			<span class="glyphicon glyphicon-search"></span> Buscar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="!isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Mostrar Filtros
+		</button>
+		<button type="button" class="btn btn-primary"
+			ng-click="filtroControle()" ng-show="isFiltros">
+			<span class="glyphicon glyphicon-filter"></span> Esconder Filtros
+		</button>
+		<button type="button" class="btn btn-info" ng-click="limparFiltros()">
+			<span class="glyphicon glyphicon-erase"></span> Limpar Filtros
+		</button>
+	</div>
+</div>
+<div style="width: 100%">
+	<table class="table table-striped">
+		<thead>
+			<tr class="">
+				<th style="width: 10%">#</th>
+				<th style="width: 30%">Codigo</th>
+				<th style="width: 30%">Cliente</th>
+			</tr>
+			<tr ng-show="isFiltros">
+				<th></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.id" /></th>
+				<th><input class="form-control" type="text"
+					ng-model="filtro.client.name" /></th>
+			</tr>
+		</thead>
+		<tfoot>
+
+		</tfoot>
+		<tbody>
+			<tr ng-repeat="sale in sales">
+				<td><input type="radio" ng-model="saleChecked.id"
+					ng-value="sale.id" /></td>
+				<td>{{sale.id}}</td>
+				<td>{{sale.client.name}}</td>
+			</tr>
+		</tbody>
+	</table>
+
+</div>

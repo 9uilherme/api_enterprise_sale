@@ -1,0 +1,38 @@
+
+<meta charset="UTF-8" />
+
+<div id="productEdit">
+	<div class="alert alert-danger" ng-show="erro">{{ erro }}</div>
+	<div class="alert alert-success" ng-show="success">{{ success }}</div>
+	<form name="formProduct" class="form-horizontal" role="form">
+		<h3 class="left1">Produto</h3>
+		<div class="form-group">
+			<label for="product.name" class="col-sm-3 control-label">Nome</label>
+			<div class="col-sm-6">
+				<input type="text" maxlength="40" placeholder="Digite o nome do produto" id="product.name" class="form-control"
+					ng-model="product.name" ng-required="true" />
+			</div>
+			<div class="col-sm-3"></div>
+
+		</div>
+		<div class="form-group">
+			<label for="product.description" class="col-sm-3 control-label">Descrição</label>
+			<div class="col-sm-6">
+				<input type="text"  maxlength="80" placeholder="Digite a descrição do produto" id="product.description" class="form-control" ng-required="true"
+					ng-model="product.description" />
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+		<div class="form-group">
+			<label for="product.price" class="col-sm-3 control-label">Preço</label>
+			<div class="col-sm-6">
+			<input type="number" class="form-control" name="product.price" placeholder="Digite o preço do produto (e.g, 12,99)" ng-model="product.price" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-required="true" />
+			</div>
+			<div class="col-sm-3"></div>
+		</div>
+
+		<input type="submit" ng-click="save()" value="Salvar"
+			class="btn btn-primary col-sm-offset-3" /> <input type="submit"
+			class="btn btn-primary" value="Limpar" ng-click="resetForm()" />
+	</form>
+</div>
