@@ -1,6 +1,6 @@
 # Descrição do Projeto:
 
--Projeto web com spring-boot utilizando maven ou gradle
+-Projeto web com spring-boot utilizando maven
 
 -template engine thymeleaf
 
